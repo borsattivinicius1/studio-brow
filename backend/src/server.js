@@ -9,8 +9,8 @@ import { authMiddleware } from "./middlewares/auth.middleware.js";
 const app = express();
 const prisma = new PrismaClient();
 
-app.use(cors());
-app.use(express.json());
+app.use(cors())
+app.use(express.json())
 
 app.use("/auth", authRoutes)
 
