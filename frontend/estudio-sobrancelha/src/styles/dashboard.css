@@ -1,0 +1,91 @@
+body{
+  background:#0f0f14;
+  color:white;
+  font-family:Arial;
+}
+
+.dashboard-container{
+
+  min-height:100vh;
+
+  padding:30px;
+
+  display:flex;
+  flex-direction:column;
+  gap:30px;
+}
+
+h1{
+  text-align:center;
+  color:#7c3aed;
+}
+
+.agenda-box{
+
+  background:#171720;
+
+  padding:25px;
+
+  border-radius:18px;
+
+  display:flex;
+  flex-direction:column;
+
+  gap:15px;
+}
+
+.agenda-box input{
+
+  padding:14px;
+
+  border:none;
+  border-radius:10px;
+
+  background:#0f0f18;
+  color:white;
+}
+
+.agenda-box button{
+
+  padding:14px;
+
+  border:none;
+  border-radius:12px;
+
+  background:#7c3aed;
+
+  color:white;
+
+  font-weight:600;
+}
+
+.meus-agendamentos{
+
+  background:#171720;
+
+  padding:25px;
+
+  border-radius:18px;
+}
+
+.agendamento{
+
+  display:flex;
+
+  justify-content:space-between;
+
+  margin-top:15px;
+}
+
+.cancelar{
+
+  background:#ef4444;
+
+  border:none;
+
+  padding:8px 14px;
+
+  border-radius:8px;
+
+  color:white;
+}

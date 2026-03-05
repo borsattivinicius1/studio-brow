@@ -1,0 +1,137 @@
+/* RESET */
+
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:Arial, Helvetica, sans-serif;
+}
+
+body{
+  background:#0f0f14;
+  color:white;
+}
+
+/* CONTAINER PRINCIPAL */
+
+.login-container{
+  width:100%;
+  min-height:100vh;
+
+  display:flex;
+  justify-content:center;
+  align-items:center;
+
+  padding:20px;
+
+  background:
+  radial-gradient(circle at top,#1b1033,#0f0f14 70%);
+}
+
+/* CARD */
+
+.login-card{
+
+  width:100%;
+  max-width:380px;
+
+  background:#171720;
+
+  padding:40px 30px;
+
+  border-radius:20px;
+
+  display:flex;
+  flex-direction:column;
+
+  box-shadow:0 20px 40px rgba(0,0,0,0.6);
+}
+
+/* TITULO */
+
+.logo{
+  text-align:center;
+  color:#7c3aed;
+  font-size:30px;
+  margin-bottom:8px;
+}
+
+.subtitle{
+  text-align:center;
+  color:#a1a1aa;
+  margin-bottom:30px;
+}
+
+/* FORM */
+
+.login-card form{
+  display:flex;
+  flex-direction:column;
+  gap:18px; /* ESPAÇO ENTRE INPUTS */
+}
+
+/* INPUT */
+
+.login-card input{
+
+  width:100%;
+
+  padding:15px;
+
+  border:none;
+  border-radius:12px;
+
+  background:#0f0f18;
+  color:white;
+
+  font-size:16px;
+
+  transition:0.2s;
+}
+
+.login-card input::placeholder{
+  color:#777;
+}
+
+.login-card input:focus{
+  outline:none;
+  box-shadow:0 0 0 2px #7c3aed;
+}
+
+/* BOTÃO */
+
+.login-card button{
+
+  margin-top:10px;
+
+  padding:15px;
+
+  border:none;
+  border-radius:14px;
+
+  background:linear-gradient(135deg,#7c3aed,#9333ea);
+
+  color:white;
+
+  font-size:17px;
+  font-weight:600;
+
+  cursor:pointer;
+
+  transition:0.25s;
+}
+
+.login-card button:hover{
+  transform:translateY(-2px);
+  box-shadow:0 10px 20px rgba(124,58,237,0.4);
+}
+
+/* MOBILE */
+
+@media (max-width:480px){
+
+  .login-card{
+    padding:35px 25px;
+  }
+
+}
