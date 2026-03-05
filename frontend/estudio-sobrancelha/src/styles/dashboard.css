@@ -1,91 +1,90 @@
-body{
-  background:#0f0f14;
-  color:white;
-  font-family:Arial;
+.dashboard-container {
+  min-height: 100vh;
+  background: #0f0f1a;
+  color: white;
+  padding: 40px;
+  font-family: Arial, Helvetica, sans-serif;
 }
 
-.dashboard-container{
-
-  min-height:100vh;
-
-  padding:30px;
-
-  display:flex;
-  flex-direction:column;
-  gap:30px;
+.dashboard-title {
+  text-align: center;
+  font-size: 32px;
+  color: #8a2be2;
+  margin-bottom: 40px;
 }
 
-h1{
-  text-align:center;
-  color:#7c3aed;
+.agendamentos-list {
+  max-width: 800px;
+  margin: auto;
 }
 
-.agenda-box{
-
-  background:#171720;
-
-  padding:25px;
-
-  border-radius:18px;
-
-  display:flex;
-  flex-direction:column;
-
-  gap:15px;
+.agendamento-card {
+  background: #17172a;
+  padding: 20px;
+  border-radius: 12px;
+  margin-bottom: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: 0.2s;
 }
 
-.agenda-box input{
-
-  padding:14px;
-
-  border:none;
-  border-radius:10px;
-
-  background:#0f0f18;
-  color:white;
+.agendamento-card:hover {
+  transform: scale(1.02);
 }
 
-.agenda-box button{
-
-  padding:14px;
-
-  border:none;
-  border-radius:12px;
-
-  background:#7c3aed;
-
-  color:white;
-
-  font-weight:600;
+.agendamento-info p {
+  margin: 5px 0;
 }
 
-.meus-agendamentos{
-
-  background:#171720;
-
-  padding:25px;
-
-  border-radius:18px;
+.status {
+  font-weight: bold;
 }
 
-.agendamento{
-
-  display:flex;
-
-  justify-content:space-between;
-
-  margin-top:15px;
+.status.pendente {
+  color: orange;
 }
 
-.cancelar{
+.status.aprovado {
+  color: #00ff88;
+}
 
-  background:#ef4444;
+.status.cancelado {
+  color: red;
+}
 
-  border:none;
+.botoes {
+  display: flex;
+  gap: 10px;
+}
 
-  padding:8px 14px;
+.btn-aprovar {
+  background: linear-gradient(45deg,#7b2ff7,#a044ff);
+  border: none;
+  padding: 8px 14px;
+  border-radius: 8px;
+  color: white;
+  cursor: pointer;
+}
 
-  border-radius:8px;
+.btn-cancelar {
+  background: #ff4b5c;
+  border: none;
+  padding: 8px 14px;
+  border-radius: 8px;
+  color: white;
+  cursor: pointer;
+}
 
-  color:white;
+.btn-aprovar:hover {
+  opacity: 0.8;
+}
+
+.btn-cancelar:hover {
+  opacity: 0.8;
+}
+
+.sem-agendamento {
+  text-align: center;
+  color: #aaa;
 }

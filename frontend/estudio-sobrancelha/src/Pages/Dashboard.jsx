@@ -1,45 +1,129 @@
+import { useEffect, useState } from "react"
 import "../styles/dashboard.css"
+import api from "../api/api"
 
-export default function Dashboard(){
 
-  return(
+export default function Dashboard() {
+
+  const [agendamentos, setAgendamentos] = useState([])
+
+  async function carregarAgendamentos() {
+    try {
+
+      const token = localStorage.getItem("token")
+
+      const res = await api.get("/agendamentos", {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      })
+
+      setAgendamentos(res.data)
+
+    } catch (err) {
+      console.log(err)
+    }
+  }
+
+  async function aprovar(id) {
+
+    const token = localStorage.getItem("token")
+
+    await api.put(`/agendamentos/aprovar/${id}`, {}, {
+      headers: { Authorization: `Bearer ${token}` }
+    })
+
+    carregarAgendamentos()
+  }
+
+  async function cancelar(id) {
+
+    const token = localStorage.getItem("token")
+
+    await api.put(`/agendamentos/cancelar/${id}`, {}, {
+      headers: { Authorization: `Bearer ${token}` }
+    })
+
+    carregarAgendamentos()
+  }
+  
+
+ useEffect(() => {
+  async function carregar() {
+    try {
+
+      const token = localStorage.getItem("token")
+
+      const res = await api.get("/agendamentos", {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      })
+
+      setAgendamentos(res.data)
+
+    } catch (err) {
+      console.log(err)
+    }
+  }
+
+  carregar()
+}, [])
+
+  return (
 
     <div className="dashboard-container">
 
-      <h1>Agendar Sobrancelha</h1>
+      <h1 className="dashboard-title">
+        Painel de Agendamentos
+      </h1>
 
-      <div className="agenda-box">
+      <div className="agendamentos-list">
 
-        <label>Data</label>
-        <input type="date"/>
+        {agendamentos.length === 0 && (
+          <p className="sem-agendamento">
+            Nenhum agendamento encontrado
+          </p>
+        )}
 
-        <label>Horário</label>
-        <input type="time"/>
+        {agendamentos.map((ag) => (
 
-        <button>
-          Agendar
-        </button>
+          <div className="agendamento-card" key={ag.id}>
 
-      </div>
+            <div className="agendamento-info">
 
-      <div className="meus-agendamentos">
+              <p><strong>Cliente:</strong> {ag.user?.nome}</p>
+              <p><strong>Data:</strong> {new Date(ag.data).toLocaleString()}</p>
+              <p className={`status ${ag.status}`}>
+                {ag.status}
+              </p>
 
-        <h2>Meus Agendamentos</h2>
+            </div>
 
-        <div className="agendamento">
+            <div className="botoes">
 
-          <span>12/03 - 14:00</span>
+              <button
+                className="btn-aprovar"
+                onClick={() => aprovar(ag.id)}
+              >
+                Aprovar
+              </button>
 
-          <button className="cancelar">
-            Cancelar
-          </button>
+              <button
+                className="btn-cancelar"
+                onClick={() => cancelar(ag.id)}
+              >
+                Cancelar
+              </button>
 
-        </div>
+            </div>
+
+          </div>
+
+        ))}
 
       </div>
 
     </div>
-
   )
-
 }
