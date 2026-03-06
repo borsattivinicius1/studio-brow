@@ -27,18 +27,13 @@ export default function Login(){
       localStorage.setItem("token",res.data.token)
       localStorage.setItem("user",JSON.stringify(res.data.user))
 
-      const role = res.data.user.role
+      // REDIRECIONA TODOS PARA CLIENTES
+      navigate("/clientes")
 
-      if(role === "ADMIN" || role === "PROFISSIONAL"){
-        navigate("/admin")
-      }else{
-        navigate("/dashboard")
-      }
-
-   } catch (error) {
-  console.log(error)
-  alert("Email ou senha inválidos")
-}
+    } catch (error) {
+      console.log(error)
+      alert("Email ou senha inválidos")
+    }
 
     setLoading(false)
 
@@ -75,9 +70,7 @@ export default function Login(){
           />
 
           <button type="submit">
-
             {loading ? "Entrando..." : "Entrar"}
-
           </button>
 
         </form>

@@ -1,8 +1,7 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom"
 
 import Login from "./Pages/login"
-import Dashboard from "./Pages/Dashboard"
-import Admin from "./Pages/Admin"
+import Clientes from "./Pages/clientes"
 
 import PrivateRoute from "./routes/PrivateRoute"
 
@@ -14,19 +13,10 @@ function App() {
         <Route path="/" element={<Login />} />
 
         <Route
-          path="/dashboard"
+          path="/clientes"
           element={
             <PrivateRoute>
-              <Dashboard />
-            </PrivateRoute>
-          }
-        />
-
-        <Route
-          path="/admin"
-          element={
-            <PrivateRoute>
-              <Admin />
+              <Clientes />
             </PrivateRoute>
           }
         />

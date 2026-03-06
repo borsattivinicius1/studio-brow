@@ -4,6 +4,8 @@ import cors from "cors";
 import { PrismaClient } from "@prisma/client";
 import authRoutes from "./routes/auth.routes.js";
 import { authMiddleware } from "./middlewares/auth.middleware.js";
+import agendamentosRoutes from "./routes/agendamentos.js"
+import servicosRoutes from "./routes/servicos.js"
 
 
 const app = express();
@@ -13,6 +15,8 @@ app.use(cors())
 app.use(express.json())
 
 app.use("/auth", authRoutes)
+app.use("/agendamentos", agendamentosRoutes)
+app.use("/servicos", servicosRoutes)
 
 
 
@@ -57,3 +61,4 @@ app.get("/teste", authMiddleware, (req, res) => {
 app.listen(3535, () => {
   console.log("🚀 Servidor rodando na porta 3535");
 });
+

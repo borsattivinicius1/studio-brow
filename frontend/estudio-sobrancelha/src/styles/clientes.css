@@ -1,0 +1,177 @@
+body{
+  margin:0;
+  font-family:Arial;
+}
+
+.clientes-container{
+  min-height:100vh;
+  background:#0b0b12;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  padding:20px;
+}
+
+.titulo{
+  color:white;
+  margin-bottom:20px;
+}
+
+.card{
+  background:#171722;
+  width:100%;
+  max-width:420px;
+  padding:20px;
+  border-radius:14px;
+  box-shadow:0 0 20px rgba(130,0,255,0.3);
+}
+
+label{
+  color:#aaa;
+  font-size:14px;
+  margin-top:15px;
+  display:block;
+}
+
+select{
+  width:100%;
+  padding:10px;
+  border:none;
+  border-radius:8px;
+  margin-top:5px;
+  background:#0f0f18;
+  color:white;
+}
+
+.horarios{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:10px;
+  margin-top:10px;
+}
+
+.hora{
+  padding:10px;
+  border:none;
+  border-radius:8px;
+  background:#222;
+  color:white;
+  cursor:pointer;
+  transition:0.2s;
+}
+
+.hora:hover{
+  background:#6c2cff;
+}
+
+.hora.ativo{
+  background:#8a2cff;
+}
+
+.btn-agendar{
+  width:100%;
+  margin-top:20px;
+  padding:12px;
+  border:none;
+  border-radius:10px;
+  background:#8a2cff;
+  color:white;
+  font-size:16px;
+  cursor:pointer;
+  transition:0.3s;
+}
+
+.btn-agendar:hover{
+  background:#a64dff;
+}
+
+.react-calendar {
+  background: #0f0f0f;
+  border: none;
+  border-radius: 15px;
+  padding: 10px;
+  color: white;
+  width: 100%;
+  max-width: 350px;
+}
+
+.react-calendar__navigation button {
+  color: #a855f7;
+  font-weight: bold;
+  font-size: 16px;
+}
+
+.react-calendar__month-view__weekdays {
+  color: #a855f7;
+  font-weight: bold;
+}
+
+.react-calendar__tile {
+  background: transparent;
+  color: white;
+  border-radius: 8px;
+  padding: 10px;
+}
+
+.react-calendar__tile:hover {
+  background: #6b21a8;
+  color: white;
+}
+
+.react-calendar__tile--active {
+  background: #9333ea;
+  color: white;
+}
+
+.react-calendar__tile--now {
+  background: #4c1d95;
+  color: white;
+}
+
+
+.titulo-agendamentos{
+  margin-top: 30px;
+  color: white;
+  font-size: 18px;
+}
+
+.lista-agendamentos{
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  margin-top: 15px;
+}
+
+.card-agendamento{
+  background: #121212;
+  border-radius: 15px;
+  padding: 15px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 0 10px rgba(0,0,0,0.3);
+}
+
+.info-agendamento h4{
+  color: #a855f7;
+  margin: 0;
+}
+
+.info-agendamento p{
+  color: #ccc;
+  margin: 3px 0;
+  font-size: 14px;
+}
+
+.btn-cancelar{
+  background: #7e22ce;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 8px;
+  color: white;
+  font-size: 12px;
+}
+
+.btn-cancelar:hover{
+  background: #9333ea;
+}

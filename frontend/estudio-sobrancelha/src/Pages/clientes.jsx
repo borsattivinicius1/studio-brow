@@ -1,145 +1,185 @@
-import { useEffect, useState } from "react"
-import "../styles/cliente.css"
-import api from "../api/api"
+import { useState, useEffect } from "react"
+import api from "../api/api.js"
+import Calendar from "react-calendar"
+import "react-calendar/dist/Calendar.css"
+import "../styles/clientes.css"
 
-export default function Cliente() {
+export default function Clientes(){
 
-  const [data, setData] = useState("")
-  const [agendamentos, setAgendamentos] = useState([])
+  const [servicos,setServicos] = useState([])
+  const [servicoId,setServicoId] = useState("")
+  const [data,setData] = useState(new Date())
+  const [hora,setHora] = useState("")
+  const [agendamentos,setAgendamentos] = useState([])
 
-  const token = localStorage.getItem("token")
+  const horarios = [
+    "09:00","10:00","11:00",
+    "13:00","14:00","15:00",
+    "16:00","17:00"
+  ]
 
-  async function carregarAgendamentos() {
-    try {
-
-      const res = await api.get("/agendamentos/meus", {
-        headers: {
-          Authorization: `Bearer ${token}`
-        }
-      })
-
-      setAgendamentos(res.data)
-
-    } catch (err) {
-      console.log(err)
-    }
+  async function carregarServicos(){
+    const res = await api.get("/servicos")
+    setServicos(res.data)
   }
 
-  async function agendar(e) {
-    e.preventDefault()
+  async function carregarAgendamentos(){
+    const user = JSON.parse(localStorage.getItem("user"))
 
-    try {
+    const res = await api.get("/agendamentos")
 
-      await api.post("/agendamentos", 
-        { data },
-        {
-          headers: {
-            Authorization: `Bearer ${token}`
-          }
-        }
-      )
+    const meus = res.data.filter(a => a.userId === user.id)
 
-      setData("")
-      carregarAgendamentos()
-
-    } catch (err) {
-      console.log(err)
-    }
+    setAgendamentos(meus)
   }
 
-  async function cancelar(id) {
-
-    try {
-
-      await api.put(`/agendamentos/cancelar/${id}`, {}, {
-        headers: {
-          Authorization: `Bearer ${token}`
-        }
-      })
-
-      carregarAgendamentos()
-
-    } catch (err) {
-      console.log(err)
+  useEffect(() => {
+    const carregar = async () => {
+      try{
+        await carregarServicos()
+        await carregarAgendamentos()
+      }catch(error){
+        console.log(error)
+      }
     }
+
+    carregar()
+  }, [])
+
+  async function agendar(){
+
+    if(!servicoId || !hora){
+      alert("Selecione serviço e horário")
+      return
+    }
+
+    const dataFormatada =
+      data.toISOString().split("T")[0] + "T" + hora + ":00"
+
+    const user = JSON.parse(localStorage.getItem("user"))
+
+    await api.post("/agendamentos",{
+      data:dataFormatada,
+      userId:user.id,
+      servicoId:Number(servicoId)
+    })
+
+    alert("Agendamento realizado!")
+
+    carregarAgendamentos()
   }
 
-useEffect(() => {
-  async function carregar() {
-    try {
-
-      const token = localStorage.getItem("token")
-
-      const res = await api.get("/agendamentos", {
-        headers: {
-          Authorization: `Bearer ${token}`
-        }
-      })
-
-      setAgendamentos(res.data)
-
-    } catch (err) {
-      console.log(err)
-    }
+  async function cancelarAgendamento(id){
+    await api.delete(`/agendamentos/${id}`)
+    carregarAgendamentos()
   }
 
-  carregar()
-}, [])
-  return (
+  return(
 
-    <div className="cliente-container">
+    <div className="clientes-container">
 
-      <h1 className="cliente-title">
-        Agendar Horário
+      <h1 className="titulo">
+        Agendar horário
       </h1>
 
-      <form className="agendamento-form" onSubmit={agendar}>
+      <div className="card">
 
-        <input
-          type="datetime-local"
+        <label>Serviço</label>
+
+        <select
+          value={servicoId}
+          onChange={e=>setServicoId(e.target.value)}
+        >
+          <option value="">
+            Escolher serviço
+          </option>
+
+          {servicos.map(s=>(
+            <option key={s.id} value={s.id}>
+              {s.nome} - R${s.preco}
+            </option>
+          ))}
+
+        </select>
+
+        <label>Data</label>
+
+        <Calendar
+          onChange={setData}
           value={data}
-          onChange={(e) => setData(e.target.value)}
-          required
         />
 
-        <button type="submit">
+        <label>Horário</label>
+
+        <div className="horarios">
+
+          {horarios.map(h=>(
+            <button
+              key={h}
+              className={
+                hora === h
+                ? "hora ativo"
+                : "hora"
+              }
+              onClick={()=>setHora(h)}
+            >
+              {h}
+            </button>
+          ))}
+
+        </div>
+
+        <button
+          className="btn-agendar"
+          onClick={agendar}
+        >
           Agendar
         </button>
 
-      </form>
+      </div>
 
-      <h2 className="cliente-subtitle">
+      {/* LISTA DE AGENDAMENTOS */}
+
+      <h2 className="titulo-agendamentos">
         Meus Agendamentos
       </h2>
 
-      <div className="agendamentos-list">
+      <div className="lista-agendamentos">
 
-        {agendamentos.map((ag) => (
+        {agendamentos.map(ag => {
 
-          <div className="agendamento-card" key={ag.id}>
+          const servico = servicos.find(s => s.id === ag.servicoId)
 
-            <p><strong>Nome:</strong> {ag.user?.nome}</p>
+          return(
+            <div className="card-agendamento" key={ag.id}>
 
-            <p>
-              <strong>Data:</strong>
-              {new Date(ag.data).toLocaleDateString()}
-            </p>
+              <div>
 
-            <p>
-              <strong>Hora:</strong>
-              {new Date(ag.data).toLocaleTimeString([], {hour:'2-digit', minute:'2-digit'})}
-            </p>
+                <h3>
+                  {servico ? servico.nome : "Serviço"}
+                </h3>
 
-            <button
-              className="btn-cancelar"
-              onClick={() => cancelar(ag.id)}
-            >
-              Cancelar
-            </button>
+                <p>
+                  📅 {new Date(ag.data).toLocaleDateString()}
+                </p>
 
-          </div>
+                <p>
+                  ⏰ {new Date(ag.data).toLocaleTimeString([], {hour:'2-digit', minute:'2-digit'})}
+                </p>
 
-        ))}
+              </div>
+
+              <button
+                className="btn-cancelar"
+                onClick={()=>cancelarAgendamento(ag.id)}
+              >
+                Cancelar
+              </button>
+
+            </div>
+          )
+
+        })}
 
       </div>
 
