@@ -79,20 +79,20 @@ export default function Clientes(){
     <div className="clientes-container">
 
       <h1 className="titulo">
-        Agendar horário
-      </h1>
+           Agendar Horário
+       </h1>
 
       <div className="card">
 
-        <label>Serviço</label>
+        <label>Serviços</label>
 
         <select
           value={servicoId}
           onChange={e=>setServicoId(e.target.value)}
         >
-          <option value="">
-            Escolher serviço
-          </option>
+         <option value="">
+             Selecione um serviço
+         </option>
 
           {servicos.map(s=>(
             <option key={s.id} value={s.id}>
@@ -102,7 +102,7 @@ export default function Clientes(){
 
         </select>
 
-        <label>Data</label>
+        <label>Date</label>
 
         <Calendar
           onChange={setData}

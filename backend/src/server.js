@@ -58,7 +58,7 @@ app.get("/teste", authMiddleware, (req, res) => {
   });
 });
 
-app.listen(3535, () => {
-  console.log("🚀 Servidor rodando na porta 3535");
-});
 
+app.listen(3535, "0.0.0.0", () => {
+  console.log("🚀 Servidor rodando ")
+})
