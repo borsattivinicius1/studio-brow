@@ -8,6 +8,7 @@ import agendamentosRoutes from "./routes/agendamentos.js"
 import servicosRoutes from "./routes/servicos.js"
 
 
+
 const app = express();
 const prisma = new PrismaClient();
 
