@@ -102,7 +102,7 @@ export default function Clientes(){
 
         </select>
 
-        <label>Date</label>
+        <label>Data</label>
 
         <Calendar
           onChange={setData}
