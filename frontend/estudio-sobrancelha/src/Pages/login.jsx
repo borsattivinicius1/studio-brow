@@ -73,12 +73,24 @@ export default function Login(){
             {loading ? "Entrando..." : "Entrar"}
           </button>
 
+
+          <p className="link-register">
+            Não tem conta? 
+          <span onClick={()=>navigate("/register")}>
+            Criar conta
+          </span>
+        </p>
+
         </form>
 
       </div>
 
     </div>
 
+    
+
   )
 
 }
+
+

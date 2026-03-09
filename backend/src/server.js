@@ -6,6 +6,7 @@ import authRoutes from "./routes/auth.routes.js";
 import { authMiddleware } from "./middlewares/auth.middleware.js";
 import agendamentosRoutes from "./routes/agendamentos.js"
 import servicosRoutes from "./routes/servicos.js"
+import usersRoutes from "./routes/users.js"
 
 
 
@@ -18,6 +19,7 @@ app.use(express.json())
 app.use("/auth", authRoutes)
 app.use("/agendamentos", agendamentosRoutes)
 app.use("/servicos", servicosRoutes)
+app.use("/users", usersRoutes)
 
 
 

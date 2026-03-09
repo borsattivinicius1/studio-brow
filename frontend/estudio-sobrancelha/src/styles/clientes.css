@@ -175,3 +175,15 @@ select{
 .btn-cancelar:hover{
   background: #9333ea;
 }
+
+
+.hora.ocupado{
+  background:#ddd;
+  color:#777;
+  cursor:not-allowed;
+}
+
+.hora:disabled{
+  opacity:0.6;
+}
+
