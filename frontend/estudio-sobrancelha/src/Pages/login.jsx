@@ -24,15 +24,23 @@ export default function Login(){
         senha
       })
 
+      const user = res.data.user
+
       localStorage.setItem("token",res.data.token)
-      localStorage.setItem("user",JSON.stringify(res.data.user))
+      localStorage.setItem("user",JSON.stringify(user))
 
-      // REDIRECIONA TODOS PARA CLIENTES
-      navigate("/clientes")
+      // REDIRECIONA DEPENDENDO DO ROLE
+      if(user.role === "ADMIN"){
+        navigate("/dashboard")
+      }else{
+        navigate("/clientes")
+      }
 
-    } catch (error) {
+    }catch(error){
+
       console.log(error)
       alert("Email ou senha inválidos")
+
     }
 
     setLoading(false)
@@ -63,7 +71,7 @@ export default function Login(){
 
           <input
             type="password"
-            placeholder="senha"
+            placeholder="Senha"
             value={senha}
             onChange={e=>setSenha(e.target.value)}
             required
@@ -73,13 +81,12 @@ export default function Login(){
             {loading ? "Entrando..." : "Entrar"}
           </button>
 
-
           <p className="link-register">
-            Não tem conta? 
-          <span onClick={()=>navigate("/register")}>
-            Criar conta
-          </span>
-        </p>
+            Não tem conta?
+            <span onClick={()=>navigate("/register")}>
+              Criar conta
+            </span>
+          </p>
 
         </form>
 
@@ -87,10 +94,6 @@ export default function Login(){
 
     </div>
 
-    
-
   )
 
 }
-
-

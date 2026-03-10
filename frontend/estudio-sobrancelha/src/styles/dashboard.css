@@ -1,0 +1,97 @@
+body{
+  background:#0f0f14;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.dashboard-container{
+  max-width:900px;
+  margin:auto;
+  padding:40px 20px;
+}
+
+.dashboard-container h1{
+  text-align:center;
+  color:#b266ff;
+  margin-bottom:30px;
+}
+
+.nenhum{
+  text-align:center;
+  color:white;
+}
+
+.agendamento-card{
+  background:#1b1b23;
+  border-radius:12px;
+  padding:20px;
+  margin-bottom:20px;
+  border:1px solid #2a2a35;
+  box-shadow:0 0 10px rgba(178,102,255,0.2);
+  transition:0.3s;
+}
+
+.agendamento-card:hover{
+  transform:scale(1.02);
+  box-shadow:0 0 20px rgba(178,102,255,0.4);
+}
+
+.info{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:10px;
+  margin-bottom:15px;
+}
+
+.info p{
+  color:white;
+  margin:0;
+}
+
+.status{
+  font-weight:bold;
+}
+
+.status-pendente{
+  color:#f1c40f;
+}
+
+.status-aprovado{
+  color:#2ecc71;
+}
+
+.status-cancelado{
+  color:#e74c3c;
+}
+
+.botoes{
+  display:flex;
+  gap:10px;
+}
+
+.btn-aprovar{
+  background:#7d3cff;
+  border:none;
+  padding:8px 16px;
+  border-radius:6px;
+  color:white;
+  cursor:pointer;
+  transition:0.2s;
+}
+
+.btn-aprovar:hover{
+  background:#9b59ff;
+}
+
+.btn-cancelar{
+  background:#ff4d4d;
+  border:none;
+  padding:8px 16px;
+  border-radius:6px;
+  color:white;
+  cursor:pointer;
+  transition:0.2s;
+}
+
+.btn-cancelar:hover{
+  background:#ff6666;
+}

@@ -187,3 +187,26 @@ select{
   opacity:0.6;
 }
 
+.status{
+  margin-top:5px;
+  font-weight:bold;
+}
+
+.status-pendente{
+  color:#f1c40f;
+}
+
+.status-aprovado{
+  color:#2ecc71;
+}
+
+.status-cancelado{
+  color:#e74c3c;
+}
+
+.hora.ocupado{
+  background:#2c2c2c;
+  color:#777;
+  cursor:not-allowed;
+  border:1px solid #444;
+}

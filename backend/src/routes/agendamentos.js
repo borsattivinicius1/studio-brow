@@ -105,4 +105,34 @@ router.delete("/:id", async (req,res)=>{
 
 })
 
+
+
+router.put("/aprovar/:id", async (req,res)=>{
+
+  const { id } = req.params
+
+  const agendamento = await prisma.agendamento.update({
+    where:{ id:Number(id) },
+    data:{ status:"APROVADO" }
+  })
+
+  res.json(agendamento)
+
+})
+
+
+router.put("/cancelar/:id", async (req,res)=>{
+
+  const { id } = req.params
+
+  const agendamento = await prisma.agendamento.update({
+    where:{ id:Number(id) },
+    data:{ status:"CANCELADO" }
+  })
+
+  res.json(agendamento)
+
+})
+
+
 export default router
