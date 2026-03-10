@@ -75,6 +75,8 @@ export default function Dashboard(){
 
     <div className="dashboard-container">
 
+        <img src="/Logo.png" className="logo"/>
+
       <h1>Painel de Agendamentos</h1>
 
       {agendamentos.length === 0 && (

@@ -53,6 +53,8 @@ export default function Login(){
 
       <div className="login-card">
 
+        <img src="/Logo.png" className="logo"/>
+
         <h1 className="logo">Studio Brow</h1>
 
         <p className="subtitle">

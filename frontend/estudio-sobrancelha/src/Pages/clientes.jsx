@@ -88,6 +88,9 @@ export default function Clientes() {
 
   return (
     <div className="clientes-container">
+
+      <img src="/Logo.png" className="logo" />
+      
       <h1 className="titulo">Agendar Horário</h1>
 
       <div className="card">

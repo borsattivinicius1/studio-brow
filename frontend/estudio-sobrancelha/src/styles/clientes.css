@@ -210,3 +210,10 @@ select{
   cursor:not-allowed;
   border:1px solid #444;
 }
+
+.logo{
+  width:120px;
+  display:block;
+  margin:10px auto 15px auto;
+  filter: drop-shadow(0 0 12px rgba(168,85,247,0.7));
+}

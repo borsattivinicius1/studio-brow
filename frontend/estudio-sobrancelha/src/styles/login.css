@@ -7,12 +7,14 @@
   font-family:Arial, Helvetica, sans-serif;
 }
 
+/* BODY */
+
 body{
   background:#0f0f14;
   color:white;
 }
 
-/* CONTAINER PRINCIPAL */
+/* CONTAINER */
 
 .login-container{
   width:100%;
@@ -43,18 +45,20 @@ body{
 
   display:flex;
   flex-direction:column;
+  align-items:center;
 
   box-shadow:0 20px 40px rgba(0,0,0,0.6);
 }
 
-/* TITULO */
+/* LOGO */
 
 .logo{
-  text-align:center;
-  color:#7c3aed;
-  font-size:30px;
-  margin-bottom:8px;
+  width:120px;
+  margin-bottom:10px;
+  filter:drop-shadow(0 0 12px rgba(124,58,237,0.7));
 }
+
+/* SUBTITULO */
 
 .subtitle{
   text-align:center;
@@ -65,9 +69,10 @@ body{
 /* FORM */
 
 .login-card form{
+  width:100%;
   display:flex;
   flex-direction:column;
-  gap:18px; /* ESPAÇO ENTRE INPUTS */
+  gap:18px;
 }
 
 /* INPUT */
@@ -126,6 +131,19 @@ body{
   box-shadow:0 10px 20px rgba(124,58,237,0.4);
 }
 
+/* LINK REGISTRO */
+
+.link-register{
+  margin-top:20px;
+  text-align:center;
+}
+
+.link-register span{
+  color:#7c3aed;
+  cursor:pointer;
+  font-weight:bold;
+}
+
 /* MOBILE */
 
 @media (max-width:480px){
@@ -134,75 +152,4 @@ body{
     padding:35px 25px;
   }
 
-}
-
-body{
-  margin:0;
-  padding:0;
-  font-family:Arial, Helvetica, sans-serif;
-  background:#000;
-  height:100vh;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-}
-
-.login-container{
-  width:350px;
-  padding:40px;
-  background:#111;
-  border-radius:10px;
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  box-shadow:0 10px 30px rgba(0,0,0,0.6);
-}
-
-.login-container h1{
-  color:white;
-  margin-bottom:30px;
-}
-
-form{
-  width:100%;
-  display:flex;
-  flex-direction:column;
-}
-
-input{
-  padding:12px;
-  margin-bottom:15px;
-  border-radius:6px;
-  border:1px solid #555;
-  background:#1c1c1c;
-  color:white;
-}
-
-input::placeholder{
-  color:#aaa;
-}
-
-button{
-  padding:12px;
-  border:none;
-  border-radius:6px;
-  background:linear-gradient(90deg,#6c63ff,#7b74ff);
-  color:white;
-  font-size:16px;
-  cursor:pointer;
-}
-
-button:hover{
-  opacity:0.9;
-}
-
-.link-register{
-  margin-top:15px;
-  color:white;
-}
-
-.link-register span{
-  color:#6c63ff;
-  cursor:pointer;
-  font-weight:bold;
 }
