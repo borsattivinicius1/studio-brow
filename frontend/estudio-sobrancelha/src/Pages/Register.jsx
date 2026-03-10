@@ -25,7 +25,7 @@ export default function Register(){
 
       alert("Conta criada com sucesso!")
 
-      navigate("/login")
+      navigate("/")
 
    }catch(err){
 
