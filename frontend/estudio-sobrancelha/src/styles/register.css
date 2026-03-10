@@ -1,0 +1,166 @@
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:Arial, Helvetica, sans-serif;
+}
+
+body{
+  background:#0f0f14;
+}
+
+/* CONTAINER */
+
+.register-container{
+
+  min-height:100vh;
+
+  display:flex;
+  justify-content:center;
+  align-items:center;
+
+  padding:20px;
+
+  background:
+  radial-gradient(circle at top,#2a1459,#0f0f14 70%);
+}
+
+/* CARD */
+
+.register-card{
+
+  width:100%;
+  max-width:380px;
+
+  background:#171720;
+
+  padding:40px 30px;
+
+  border-radius:20px;
+
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+
+  box-shadow:
+  0 20px 50px rgba(0,0,0,0.8),
+  0 0 30px rgba(124,58,237,0.25);
+}
+
+/* LOGO */
+
+.logo{
+  width:120px;
+  margin-bottom:15px;
+
+  filter:drop-shadow(0 0 15px rgba(124,58,237,0.6));
+}
+
+/* TITULO */
+
+.register-card h1{
+  color:white;
+  margin-bottom:25px;
+}
+
+/* FORM */
+
+.register-card form{
+
+  width:100%;
+
+  display:flex;
+  flex-direction:column;
+
+  gap:15px;
+}
+
+/* INPUT */
+
+.register-card input{
+
+  padding:14px;
+
+  border:none;
+  border-radius:12px;
+
+  background:#0f0f18;
+  color:white;
+
+  font-size:15px;
+
+  border:1px solid #242436;
+
+  transition:0.2s;
+}
+
+.register-card input::placeholder{
+  color:#777;
+}
+
+.register-card input:focus{
+  outline:none;
+
+  border:1px solid #7c3aed;
+
+  box-shadow:
+  0 0 10px rgba(124,58,237,0.5);
+}
+
+/* BOTÃO */
+
+.register-card button{
+
+  margin-top:10px;
+
+  padding:14px;
+
+  border:none;
+  border-radius:12px;
+
+  background:linear-gradient(135deg,#7c3aed,#9333ea);
+
+  color:white;
+
+  font-size:16px;
+  font-weight:bold;
+
+  cursor:pointer;
+
+  transition:0.25s;
+}
+
+.register-card button:hover{
+
+  transform:translateY(-2px);
+
+  box-shadow:
+  0 10px 25px rgba(124,58,237,0.5);
+}
+
+/* LINK LOGIN */
+
+.link-login{
+
+  margin-top:10px;
+
+  text-align:center;
+
+  color:#aaa;
+
+  font-size:14px;
+}
+
+.link-login span{
+
+  color:#7c3aed;
+  font-weight:bold;
+
+  margin-left:5px;
+
+  cursor:pointer;
+}
+
+.link-login span:hover{
+  text-decoration:underline;
+}
