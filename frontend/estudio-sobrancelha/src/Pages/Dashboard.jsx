@@ -1,81 +1,98 @@
-import { useEffect, useState } from "react"
-import api from "../api/api"
-import "../styles/dashboard.css"
+import { useEffect, useState } from "react";
+import api from "../api/api";
+import "../styles/dashboard.css";
 
-export default function Dashboard(){
+export default function Dashboard() {
+  const [agendamentos, setAgendamentos] = useState([]);
+  const token = localStorage.getItem("token");
 
-  const [agendamentos,setAgendamentos] = useState([])
-  const token = localStorage.getItem("token")
+  async function carregarAgendamentos() {
+    try {
+      const res = await api.get("/agendamentos", {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
 
-  async function carregarAgendamentos(){
-    try{
+      const ordenados = res.data.sort((a, b) => {
+        return new Date(a.data) - new Date(b.data);
+      });
 
-      const res = await api.get("/agendamentos",{
-        headers:{
-          Authorization:`Bearer ${token}`
-        }
-      })
-
-      const ordenados = res.data.sort((a,b)=>{
-        return new Date(a.data) - new Date(b.data)
-      })
-
-      setAgendamentos(ordenados)
-
-    }catch(err){
-      console.log(err)
+      setAgendamentos(ordenados);
+    } catch (err) {
+      console.log(err);
     }
   }
 
-  async function aprovar(id){
-    try{
+  async function aprovar(id) {
+    try {
+      await api.put(
+        `/agendamentos/aprovar/${id}`,
+        {},
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        },
+      );
 
-      await api.put(`/agendamentos/aprovar/${id}`,{},{
-        headers:{
-          Authorization:`Bearer ${token}`
-        }
-      })
-
-      carregarAgendamentos()
-
-    }catch(err){
-      console.log(err)
+      carregarAgendamentos();
+    } catch (err) {
+      console.log(err);
     }
   }
 
-  async function cancelar(id){
-    try{
+  async function cancelar(id) {
+    try {
+      await api.put(
+        `/agendamentos/cancelar/${id}`,
+        {},
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        },
+      );
 
-      await api.put(`/agendamentos/cancelar/${id}`,{},{
-        headers:{
-          Authorization:`Bearer ${token}`
-        }
-      })
-
-      carregarAgendamentos()
-
-    }catch(err){
-      console.log(err)
+      carregarAgendamentos();
+    } catch (err) {
+      console.log(err);
     }
   }
 
- useEffect(() => {
-  const carregar = async () => {
-    try{
-      await carregarAgendamentos()
-    }catch(error){
-      console.log(error)
+  async function finalizar(id) {
+    try {
+      await api.patch(
+        `/agendamentos/finalizar/${id}`,
+        {},
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        },
+      );
+
+      carregarAgendamentos();
+    } catch (err) {
+      console.log(err);
     }
   }
 
-  carregar()
-}, [])
+  useEffect(() => {
+    const carregar = async () => {
+      try {
+        await carregarAgendamentos();
+      } catch (error) {
+        console.log(error);
+      }
+    };
 
-  return(
+    carregar();
+  }, []);
 
+  return (
     <div className="dashboard-container">
-
-        <img src="/Logo.png" className="logo"/>
+      <img src="/Logo.png" className="logo" />
 
       <h1>Painel de Agendamentos</h1>
 
@@ -83,17 +100,15 @@ export default function Dashboard(){
         <p className="nenhum">Nenhum agendamento encontrado</p>
       )}
 
-      {agendamentos.map((ag)=>{
+      {agendamentos.map((ag) => {
+        const data = new Date(ag.data);
 
-        const data = new Date(ag.data)
-
-        return(
-
+        return (
           <div className="agendamento-card" key={ag.id}>
-
             <div className="info">
-
-              <p><strong>Cliente:</strong> {ag.user?.nome}</p>
+              <p>
+                <strong>Cliente:</strong> {ag.user?.nome}
+              </p>
 
               <p>
                 <strong>Serviço:</strong> {ag.servico?.nome}
@@ -105,48 +120,44 @@ export default function Dashboard(){
 
               <p>
                 <strong>Hora:</strong>{" "}
-                {data.toLocaleTimeString([],{
-                  hour:"2-digit",
-                  minute:"2-digit"
+                {data.toLocaleTimeString([], {
+                  hour: "2-digit",
+                  minute: "2-digit",
                 })}
               </p>
 
               <p className={`status status-${ag.status.toLowerCase()}`}>
                 {ag.status}
               </p>
-
             </div>
 
             {ag.status === "PENDENTE" && (
-
               <div className="botoes">
-
-                <button
-                  className="btn-aprovar"
-                  onClick={()=>aprovar(ag.id)}
-                >
+                <button className="btn-aprovar" onClick={() => aprovar(ag.id)}>
                   Aprovar
                 </button>
 
                 <button
                   className="btn-cancelar"
-                  onClick={()=>cancelar(ag.id)}
+                  onClick={() => cancelar(ag.id)}
                 >
                   Cancelar
                 </button>
-
               </div>
-
             )}
-
+            {ag.status === "APROVADO" && (
+              <div className="botoes">
+                <button
+                  className="btn-finalizar"
+                  onClick={() => finalizar(ag.id)}
+                >
+                  Finalizar
+                </button>
+              </div>
+            )}
           </div>
-
-        )
-
+        );
       })}
-
     </div>
-
-  )
-
+  );
 }

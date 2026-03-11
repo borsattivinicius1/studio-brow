@@ -108,3 +108,20 @@ body{
   margin:0 auto 20px auto;
   filter:drop-shadow(0 0 12px rgba(178,102,255,0.7));
 }
+
+
+
+
+.btn-finalizar{
+  background:#4CAF50;
+  color:white;
+  border:none;
+  padding:8px 14px;
+  border-radius:6px;
+  cursor:pointer;
+  margin-top:5px;
+}
+
+.btn-finalizar:hover{
+  background:#3c8c41;
+}

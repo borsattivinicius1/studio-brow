@@ -133,6 +133,31 @@ router.put("/cancelar/:id", async (req,res)=>{
   res.json(agendamento)
 
 })
+router.patch("/finalizar/:id", async (req, res) => {
+  try {
 
+    const { id } = req.params;
+
+    const agendamento = await prisma.agendamento.update({
+      where: {
+        id: Number(id)
+      },
+      data: {
+        status: "FINALIZADO"
+      }
+    });
+
+    res.json(agendamento);
+
+  } catch (error) {
+
+    console.log(error)
+
+    res.status(500).json({
+      error: "Erro ao finalizar agendamento"
+    });
+
+  }
+});
 
 export default router

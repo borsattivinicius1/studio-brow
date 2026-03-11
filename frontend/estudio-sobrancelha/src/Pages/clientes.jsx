@@ -88,9 +88,8 @@ export default function Clientes() {
 
   return (
     <div className="clientes-container">
-
       <img src="/Logo.png" className="logo" />
-      
+
       <h1 className="titulo">Agendar Horário</h1>
 
       <div className="card">
@@ -176,6 +175,7 @@ export default function Clientes() {
                   <p className={`status status-${ag.status?.toLowerCase()}`}>
                     {ag.status === "PENDENTE" && "⏳ Aguardando confirmação"}
                     {ag.status === "APROVADO" && "✅ Confirmado"}
+                    {ag.status === "FINALIZADO" && "✔️ Atendimento finalizado"}
                     {ag.status === "CANCELADO" && "❌ Cancelado"}
                   </p>
                 </div>
