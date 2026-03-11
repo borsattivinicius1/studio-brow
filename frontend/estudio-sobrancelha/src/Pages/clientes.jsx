@@ -52,7 +52,13 @@ export default function Clientes() {
       return;
     }
 
-    const dataFormatada = data.toISOString().split("T")[0] + "T" + hora + ":00";
+    const dataLocal = new Date(data);
+
+    dataLocal.setHours(Number(hora.split(":")[0]));
+    dataLocal.setMinutes(Number(hora.split(":")[1]));
+    dataLocal.setSeconds(0);
+
+    const dataFormatada = dataLocal;
 
     const user = JSON.parse(localStorage.getItem("user"));
 
