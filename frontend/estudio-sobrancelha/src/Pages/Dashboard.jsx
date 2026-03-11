@@ -60,23 +60,23 @@ export default function Dashboard() {
     }
   }
 
-  async function finalizar(id) {
-    try {
-      await api.patch(
-        `/agendamentos/finalizar/${id}`,
-        {},
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        },
-      );
+  async function finalizar(id){
+  try{
 
-      carregarAgendamentos();
-    } catch (err) {
-      console.log(err);
-    }
+    await api.patch(`/agendamentos/finalizar/${id}`,{},{
+      headers:{
+        Authorization:`Bearer ${token}`
+      }
+    })
+
+    carregarAgendamentos()
+
+  }catch(err){
+    console.log(err)
   }
+}
+
+ 
 
   useEffect(() => {
     const carregar = async () => {
