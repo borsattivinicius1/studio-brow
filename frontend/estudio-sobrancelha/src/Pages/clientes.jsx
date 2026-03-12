@@ -78,19 +78,21 @@ export default function Clientes() {
     carregarAgendamentos();
   }
 
-  function horarioOcupado(h) {
-    const dataSelecionada = data.toISOString().split("T")[0];
+ function horarioOcupado(h) {
+  const dataSelecionada = data.toISOString().split("T")[0];
 
-    return agendamentos.some((ag) => {
-      const dataAg = new Date(ag.data);
+  return agendamentos.some((ag) => {
+    if (ag.status === "FINALIZADO" || ag.status === "CANCELADO") {
+      return false;
+    }
 
-      const dataAgFormatada = dataAg.toISOString().split("T")[0];
+    const dataAg = new Date(ag.data);
+    const dataAgFormatada = dataAg.toISOString().split("T")[0];
+    const horaAg = dataAg.toTimeString().slice(0, 5);
 
-      const horaAg = dataAg.toTimeString().slice(0, 5);
-
-      return dataAgFormatada === dataSelecionada && horaAg === h;
-    });
-  }
+    return dataAgFormatada === dataSelecionada && horaAg === h;
+  });
+}
 
   return (
     <div className="clientes-container">
@@ -186,12 +188,14 @@ export default function Clientes() {
                   </p>
                 </div>
 
-                <button
-                  className="btn-cancelar"
-                  onClick={() => cancelarAgendamento(ag.id)}
-                >
-                  Cancelar
-                </button>
+                {ag.status !== "FINALIZADO" && ag.status !== "CANCELADO" && (
+                  <button
+                    className="btn-cancelar"
+                    onClick={() => cancelarAgendamento(ag.id)}
+                  >
+                    Cancelar
+                  </button>
+                )}
               </div>
             );
           })}
