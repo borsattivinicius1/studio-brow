@@ -1,5 +1,5 @@
 import express from "express"
-import { PrismaClient } from "@prisma/client"
+import { PrismaClient, StatusAgendamento } from "@prisma/client"
 
 const router = express.Router()
 const prisma = new PrismaClient()
@@ -138,14 +138,10 @@ router.patch("/finalizar/:id", async (req, res) => {
 
     const { id } = req.params;
 
-    const agendamento = await prisma.agendamento.update({
-      where: {
-        id: Number(id)
-      },
-      data: {
-        status: "FINALIZADO"
-      }
-    });
+   await prisma.agendamento.update({
+  where: { id: Number(id) },
+  data: { status: StatusAgendamento.FINALIZADO }
+})
 
     res.json(agendamento);
 
