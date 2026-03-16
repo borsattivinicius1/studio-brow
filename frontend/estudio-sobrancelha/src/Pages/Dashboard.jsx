@@ -60,23 +60,23 @@ export default function Dashboard() {
     }
   }
 
-  async function finalizar(id){
-  try{
+  async function finalizar(id) {
+    try {
+      await api.patch(
+        `/agendamentos/finalizar/${id}`,
+        {},
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        },
+      );
 
-    await api.patch(`/agendamentos/finalizar/${id}`,{},{
-      headers:{
-        Authorization:`Bearer ${token}`
-      }
-    })
-
-    carregarAgendamentos()
-
-  }catch(err){
-    console.log(err)
+      carregarAgendamentos();
+    } catch (err) {
+      console.log(err);
+    }
   }
-}
-
- 
 
   useEffect(() => {
     const carregar = async () => {
@@ -86,15 +86,65 @@ export default function Dashboard() {
         console.log(error);
       }
     };
-
     carregar();
   }, []);
+
+  /* ===== MÉTRICAS ===== */
+
+  const total = agendamentos.length;
+
+  const finalizados = agendamentos.filter(
+    (a) => a.status === "FINALIZADO",
+  ).length;
+
+  const cancelados = agendamentos.filter(
+    (a) => a.status === "CANCELADO",
+  ).length;
+
+  const pendentes = agendamentos.filter((a) => a.status === "PENDENTE").length;
+
+  const faturamento = agendamentos
+    .filter((a) => a.status === "FINALIZADO")
+    .reduce((total, ag) => {
+      return total + (ag.servico?.preco || 0);
+    }, 0);
 
   return (
     <div className="dashboard-container">
       <img src="/Logo.png" className="logo" />
 
       <h1>Painel de Agendamentos</h1>
+
+      {/* CARDS */}
+
+      <div className="dashboard-cards">
+        <div className="card-dashboard">
+          <h3>Total</h3>
+          <p>{total}</p>
+        </div>
+
+        <div className="card-dashboard">
+          <h3>Pendentes</h3>
+          <p>{pendentes}</p>
+        </div>
+
+        <div className="card-dashboard">
+          <h3>Finalizados</h3>
+          <p>{finalizados}</p>
+        </div>
+
+        <div className="card-dashboard">
+          <h3>Cancelados</h3>
+          <p>{cancelados}</p>
+        </div>
+
+        <div className="card-dashboard">
+          <h3>Faturamento</h3>
+          <p>R$ {faturamento}</p>
+        </div>
+      </div>
+
+      {/* LISTA */}
 
       {agendamentos.length === 0 && (
         <p className="nenhum">Nenhum agendamento encontrado</p>
@@ -145,6 +195,7 @@ export default function Dashboard() {
                 </button>
               </div>
             )}
+
             {ag.status === "APROVADO" && (
               <div className="botoes">
                 <button
