@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import api from "../api/api.js";
 import Calendar from "react-calendar";
 import "react-calendar/dist/Calendar.css";
@@ -10,6 +10,8 @@ export default function Clientes() {
   const [data, setData] = useState(new Date());
   const [hora, setHora] = useState("");
   const [agendamentos, setAgendamentos] = useState([]);
+  const [abrirDropdown, setAbrirDropdown] = useState(false);
+  const dropdownRef = useRef(null);
 
   const horarios = [
     "09:00",
@@ -45,6 +47,19 @@ export default function Clientes() {
 
     carregar();
   }, []);
+
+  useEffect(() => {
+  function handleClickOutside(event) {
+    if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+      setAbrirDropdown(false);
+    }
+  }
+
+  document.addEventListener("mousedown", handleClickOutside);
+  return () => {
+    document.removeEventListener("mousedown", handleClickOutside);
+  };
+}, []);
 
   async function agendar() {
     if (!servicoId || !hora) {
@@ -103,25 +118,39 @@ export default function Clientes() {
       <div className="card">
         <label>Serviços</label>
 
-      <div className="dropdown-servico">
-  <div className="dropdown-header">
-    {servicoId
-      ? servicos.find((s) => s.id == servicoId)?.nome
-      : "Selecione um serviço"}
+  <div className="dropdown-servico" ref={dropdownRef}>
+  <div
+    className={`dropdown-header ${abrirDropdown ? "ativo" : ""}`}
+    onClick={() => setAbrirDropdown(!abrirDropdown)}
+  >
+    <span>
+      {servicoId
+        ? servicos.find((s) => s.id == servicoId)?.nome
+        : "Selecione um serviço"}
+    </span>
+
+    <span className={`seta ${abrirDropdown ? "girar" : ""}`}>⌄</span>
   </div>
 
-  <div className="dropdown-list">
-    {servicos.map((s) => (
-      <div
-        key={s.id}
-        className="dropdown-item"
-        onClick={() => setServicoId(s.id)}
-      >
-        <span>{s.nome}</span>
-        <span className="preco">R${s.preco}</span>
-      </div>
-    ))}
-  </div>
+  {abrirDropdown && (
+    <div className="dropdown-list">
+      {servicos.map((s) => (
+        <div
+          key={s.id}
+          className={`dropdown-item ${
+            servicoId == s.id ? "selecionado" : ""
+          }`}
+          onClick={() => {
+            setServicoId(s.id);
+            setAbrirDropdown(false);
+          }}
+        >
+          <span>{s.nome}</span>
+          <span className="preco">R${s.preco}</span>
+        </div>
+      ))}
+    </div>
+  )}
 </div>
 
         <label>Data</label>

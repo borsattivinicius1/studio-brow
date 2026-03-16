@@ -33,42 +33,7 @@ label{
   display:block;
 }
 
-select{
-  width:100%;
-  padding:12px 40px 12px 12px;
-  border-radius:12px;
-  margin-top:5px;
-  background:#0b0b12;
-  color:white;
-  font-size:14px;
-  cursor:pointer;
 
-  border:2px solid #8a2cff;
-
-  appearance:none;
-  -webkit-appearance:none;
-  -moz-appearance:none;
-
-  background-image:url("data:image/svg+xml;utf8,<svg fill='white' height='18' viewBox='0 0 24 24' width='18' xmlns='http://www.w3.org/2000/svg'><path d='M7 10l5 5 5-5z'/></svg>");
-  background-repeat:no-repeat;
-  background-position:right 15px center;
-
-  transition:all 0.25s ease;
-}
-
-select:hover{
-  box-shadow:0 0 12px rgba(168,85,247,0.7);
-}
-
-select:focus{
-  outline:none;
-  box-shadow:0 0 15px rgba(168,85,247,0.9);
-}
-
-select option{
-  background:#0b0b12;
-  color:white;
-}
 
 .horarios{
   display:grid;
@@ -246,7 +211,7 @@ select option{
 }
 
 
-/* Dropdown de serviços */
+/* DROPDOWN SERVIÇOS */
 
 .dropdown-servico{
   position:relative;
@@ -256,29 +221,51 @@ select option{
 .dropdown-header{
   background:#0f0f18;
   border:2px solid #8a2cff;
-  border-radius:10px;
+  border-radius:12px;
   padding:12px;
   color:white;
   cursor:pointer;
-  transition:0.2s;
+
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+
+  transition:0.25s;
 }
 
 .dropdown-header:hover{
-  box-shadow:0 0 10px rgba(168,85,247,0.7);
+  box-shadow:0 0 12px rgba(168,85,247,0.7);
+}
+
+.dropdown-header.ativo{
+  border-color:#a855f7;
+}
+
+.seta{
+  font-size:18px;
+  transition:0.3s;
+}
+
+.seta.girar{
+  transform:rotate(180deg);
 }
 
 .dropdown-list{
-  margin-top:5px;
+  position:absolute;
+  width:100%;
   background:#0b0b12;
-  border-radius:10px;
+  border-radius:12px;
   border:1px solid #2a2a35;
+  margin-top:6px;
   overflow:hidden;
+  animation:dropdownAnim 0.2s ease;
+  z-index:10;
 }
 
 .dropdown-item{
   display:flex;
   justify-content:space-between;
-  padding:10px 12px;
+  padding:12px;
   color:white;
   cursor:pointer;
   transition:0.2s;
@@ -288,7 +275,22 @@ select option{
   background:#8a2cff;
 }
 
+.dropdown-item.selecionado{
+  background:#6c2cff;
+}
+
 .preco{
   color:#a855f7;
   font-weight:bold;
+}
+
+@keyframes dropdownAnim{
+  from{
+    opacity:0;
+    transform:translateY(-5px);
+  }
+  to{
+    opacity:1;
+    transform:translateY(0);
+  }
 }
