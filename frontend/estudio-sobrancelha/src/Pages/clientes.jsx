@@ -103,18 +103,26 @@ export default function Clientes() {
       <div className="card">
         <label>Serviços</label>
 
-        <select
-          value={servicoId}
-          onChange={(e) => setServicoId(e.target.value)}
-        >
-          <option value="">Selecione um serviço</option>
+      <div className="dropdown-servico">
+  <div className="dropdown-header">
+    {servicoId
+      ? servicos.find((s) => s.id == servicoId)?.nome
+      : "Selecione um serviço"}
+  </div>
 
-          {servicos.map((s) => (
-            <option key={s.id} value={s.id}>
-              {s.nome} - R${s.preco}
-            </option>
-          ))}
-        </select>
+  <div className="dropdown-list">
+    {servicos.map((s) => (
+      <div
+        key={s.id}
+        className="dropdown-item"
+        onClick={() => setServicoId(s.id)}
+      >
+        <span>{s.nome}</span>
+        <span className="preco">R${s.preco}</span>
+      </div>
+    ))}
+  </div>
+</div>
 
         <label>Data</label>
 
@@ -144,7 +152,7 @@ export default function Clientes() {
                 </button>
               );
             })}
-            
+
           </div>
         </div>
 
