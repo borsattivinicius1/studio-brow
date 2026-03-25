@@ -22,6 +22,8 @@ export default function Clientes() {
     "15:00",
     "16:00",
     "17:00",
+    "18:00",
+    "19:00",
   ];
 
   async function carregarServicos() {
