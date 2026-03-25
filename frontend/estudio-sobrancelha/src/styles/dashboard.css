@@ -157,3 +157,47 @@ body{
   color:#a855f7;
   font-weight:bold;
 }
+
+.grafico{
+  background:#171722;
+  padding:20px;
+  border-radius:16px;
+  box-shadow:0 0 20px rgba(168,85,247,0.25);
+  margin-bottom:30px;
+  transition:0.3s;
+}
+
+.grafico:hover{
+  box-shadow:0 0 35px rgba(168,85,247,0.45);
+}
+
+.grafico h2{
+  color:#a855f7;
+  margin-bottom:15px;
+  text-align:center;
+}
+
+.dashboard-container{
+  max-width:1000px;
+  margin:auto;
+  padding:40px 20px;
+}
+
+body{
+  background: radial-gradient(circle at top, #1a1a2e, #0f0f14);
+}
+
+.card-dashboard{
+  background: linear-gradient(145deg, #171722, #1f1f2b);
+  padding:20px;
+  border-radius:16px;
+  text-align:center;
+  box-shadow: 0 0 15px rgba(168,85,247,0.25);
+  transition:0.3s;
+  border:1px solid #2a2a35;
+}
+
+.card-dashboard:hover{
+  transform:translateY(-5px) scale(1.02);
+  box-shadow:0 0 30px rgba(168,85,247,0.6);
+}

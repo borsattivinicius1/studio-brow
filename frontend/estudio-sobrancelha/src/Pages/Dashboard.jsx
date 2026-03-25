@@ -159,10 +159,19 @@ export default function Dashboard() {
         <h2>Faturamento por atendimento finalizado</h2>
         <ResponsiveContainer width="100%" height={300}>
           <BarChart data={dadosGrafico}>
-            <XAxis dataKey="data" />
-            <YAxis />
-            <Tooltip />
-            <Bar dataKey="valor" />
+            <XAxis dataKey="data" stroke="#aaa" />
+            <YAxis stroke="#aaa" />
+
+            <Tooltip
+              contentStyle={{
+                backgroundColor: "#1b1b23",
+                border: "1px solid #2a2a35",
+                borderRadius: "8px",
+                color: "#fff",
+              }}
+            />
+
+            <Bar dataKey="valor" radius={[8, 8, 0, 0]} />
           </BarChart>
         </ResponsiveContainer>
       </div>
