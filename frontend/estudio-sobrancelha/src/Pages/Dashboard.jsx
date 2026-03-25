@@ -159,19 +159,29 @@ export default function Dashboard() {
         <h2>Faturamento por atendimento finalizado</h2>
         <ResponsiveContainer width="100%" height={300}>
           <BarChart data={dadosGrafico}>
-            <XAxis dataKey="data" stroke="#aaa" />
-            <YAxis stroke="#aaa" />
+            <defs>
+              <linearGradient id="colorBar" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stopColor="#a855f7" stopOpacity={1} />
+                <stop offset="100%" stopColor="#6d28d9" stopOpacity={0.8} />
+              </linearGradient>
+            </defs>
+
+            <XAxis dataKey="data" stroke="#888" tick={{ fill: "#bbb" }} />
+
+            <YAxis stroke="#888" tick={{ fill: "#bbb" }} />
 
             <Tooltip
+              cursor={{ fill: "rgba(168,85,247,0.15)" }}
               contentStyle={{
-                backgroundColor: "#1b1b23",
+                backgroundColor: "#0f0f14",
                 border: "1px solid #2a2a35",
-                borderRadius: "8px",
+                borderRadius: "10px",
                 color: "#fff",
               }}
+              labelStyle={{ color: "#a855f7" }}
             />
 
-            <Bar dataKey="valor" radius={[8, 8, 0, 0]} />
+            <Bar dataKey="valor" fill="url(#colorBar)" radius={[8, 8, 0, 0]} />
           </BarChart>
         </ResponsiveContainer>
       </div>
