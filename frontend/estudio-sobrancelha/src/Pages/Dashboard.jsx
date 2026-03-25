@@ -1,6 +1,14 @@
 import { useEffect, useState } from "react";
 import api from "../api/api";
 import "../styles/dashboard.css";
+import {
+  BarChart,
+  Bar,
+  XAxis,
+  YAxis,
+  Tooltip,
+  ResponsiveContainer,
+} from "recharts";
 
 export default function Dashboard() {
   const [agendamentos, setAgendamentos] = useState([]);
@@ -30,12 +38,9 @@ export default function Dashboard() {
         `/agendamentos/aprovar/${id}`,
         {},
         {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
+          headers: { Authorization: `Bearer ${token}` },
         },
       );
-
       carregarAgendamentos();
     } catch (err) {
       console.log(err);
@@ -48,12 +53,9 @@ export default function Dashboard() {
         `/agendamentos/cancelar/${id}`,
         {},
         {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
+          headers: { Authorization: `Bearer ${token}` },
         },
       );
-
       carregarAgendamentos();
     } catch (err) {
       console.log(err);
@@ -66,12 +68,9 @@ export default function Dashboard() {
         `/agendamentos/finalizar/${id}`,
         {},
         {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
+          headers: { Authorization: `Bearer ${token}` },
         },
       );
-
       carregarAgendamentos();
     } catch (err) {
       console.log(err);
@@ -109,6 +108,18 @@ export default function Dashboard() {
       return total + (ag.servico?.preco || 0);
     }, 0);
 
+  /* ===== DADOS DO GRÁFICO (SÓ FINALIZADOS) ===== */
+
+  const dadosGrafico = agendamentos
+    .filter((a) => a.status === "FINALIZADO")
+    .map((ag) => {
+      const data = new Date(ag.data).toLocaleDateString();
+      return {
+        data,
+        valor: ag.servico?.preco || 0,
+      };
+    });
+
   return (
     <div className="dashboard-container">
       <img src="/Logo.png" className="logo" />
@@ -116,7 +127,6 @@ export default function Dashboard() {
       <h1>Painel de Agendamentos</h1>
 
       {/* CARDS */}
-
       <div className="dashboard-cards">
         <div className="card-dashboard">
           <h3>Total</h3>
@@ -142,6 +152,19 @@ export default function Dashboard() {
           <h3>Faturamento</h3>
           <p>R$ {faturamento}</p>
         </div>
+      </div>
+
+      {/* GRÁFICO */}
+      <div className="grafico">
+        <h2>Faturamento por atendimento finalizado</h2>
+        <ResponsiveContainer width="100%" height={300}>
+          <BarChart data={dadosGrafico}>
+            <XAxis dataKey="data" />
+            <YAxis />
+            <Tooltip />
+            <Bar dataKey="valor" />
+          </BarChart>
+        </ResponsiveContainer>
       </div>
 
       {/* LISTA */}
