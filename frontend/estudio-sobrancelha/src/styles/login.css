@@ -146,10 +146,20 @@ body{
 
 /* MOBILE */
 
-@media (max-width:480px){
+@media (max-width:768px){
+
+  .login-container{
+    padding:0;
+  }
 
   .login-card{
-    padding:35px 25px;
+    max-width:100%;
+    width:100%;
+    min-height:100vh;
+
+    border-radius:0;
+
+    justify-content:center;
   }
 
 }
