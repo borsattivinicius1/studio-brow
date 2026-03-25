@@ -129,7 +129,7 @@ export default function Dashboard() {
       {/* CARDS */}
       <div className="dashboard-cards">
         <div className="card-dashboard">
-          <h3>Total</h3>
+          <h3>Serviços</h3>
           <p>{total}</p>
         </div>
 
@@ -149,14 +149,14 @@ export default function Dashboard() {
         </div>
 
         <div className="card-dashboard">
-          <h3>Faturamento</h3>
+          <h3>Total</h3>
           <p>R$ {faturamento}</p>
         </div>
       </div>
 
       {/* GRÁFICO */}
       <div className="grafico">
-        <h2>Faturamento por atendimento finalizado</h2>
+        <h2>Faturamento por Dia</h2>
         <ResponsiveContainer width="100%" height={300}>
           <BarChart data={dadosGrafico}>
             <defs>
